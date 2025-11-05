@@ -1,0 +1,17 @@
+a) Minkä nimisiä omistajia taulussa on ? Tulosta omistajan nimi vain kerran.
+	mysql> SELECT DISTINCT owner FROM pet;
+
+b) Tulosta lemmikkien nimet aakkosjärjestyksessä.
+	mysql> SELECT name FROM pet ORDER BY name ASC;
+
+c) Tulosta kaikki elossa olevat lemmikit.
+	mysql> SELECT * FROM pet WHERE death IS NULL;
+
+d) Tulosta kaikki omistajat, joiden nimi alkaa kirjaimella H.
+	mysql> SELECT DISTINCT owner FROM pet WHERE owner LIKE'H%';
+
+e) Tulosta lemmikkien nimet, joiden nimessä esiintyy kirjaimet ff.
+	mysql> SELECT name FROM pet WHERE name LIKE '%ff%';
+
+f) Tulosta lemmikkien nimet, joiden nimessä on 4 kirjainta.
+	mysql> SELECT name FROM pet WHERE name LIKE '____';
