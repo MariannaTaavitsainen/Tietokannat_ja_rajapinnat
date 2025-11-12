@@ -1,0 +1,28 @@
+a) Tulosta kymmenen aakkosjärjestyksessä ensimmäisen työntekijän tiedot sukunimen mukaan lajiteltuna. Vihje: LIMIT rajoittaa tulostettavien tietojen määrän.
+	- mysql> select last_name, first_name from employees order by last_name limit 10;
+
+b) Sama kuten edellä, mutta sukunimen JA etunimen mukaan lajiteltuna.
+	- mysql> select last_name, first_name from employees order by last_name, first_name limit 10;
+
+c) Tulosta viiden viimeksi palkatun työntekijän tiedot.
+	- mysql> select * from employees order by hire_date desc limit 5;
+
+Seuraavissa tehtävissä tarvitaan tietoja useammasta kuin yhdestä taulusta (JOIN).
+
+d) Kenellä on suurin palkka ? Tulosta etunimi, sukunimi ja palkka.
+	- mysql> select e.first_name, e.last_name, s.salary from employees e join salaries s on e.emp_no = 	s.emp_no order by s.salary desc limit 1;
+
+e) Kenellä on pienin palkka ? Tulosta etunimi, sukunimi ja palkka.
+	- mysql> select e.first_name, e.last_name, s.salary from employees e join salaries s on e.emp_no = 	s.emp_no order by s.salary limit 1;
+
+f) Tulosta työntekijät (etunimi, sukunimi, palkka), jotka ansaitsevat yli 150000. 
+	- mysql> select e.first_name, e.last_name, s.salary from employees e join salaries s on e.emp_no = 	s.emp_no where s.salary>=150000;
+
+g) Kuinka monta työntekijää työskentelee myynnissä (Sales) ? Entä markkinoinnissa (Marketing) ?
+	- mysql> select d.dept_name, count(de.emp_no) as employee_count from departments d join dept_emp de on 	d.dept_no = de.dept_no group by d.dept_name;
+
+h) Tulosta kaikkien osastonjohtajien (Department Managers) etunimi, sukunimi ja osasto, jolla työskentelee.
+	- mysql> select e.first_name, e.last_name, d.dept_name FROM dept_manager dm join employees e on dm.emp_no 	= e.emp_no join departments d on dm.dept_no = d.dept_no;
+
+i) Mikä on myynnissä työskentelevien keskipalkka ? Entä markkinoinnissa ?
+	- mysql> select d.dept_name, AVG(s.salary) FROM employees e JOIN dept_emp de on e.emp_no = de.emp_no JOIN 	departments d on de.dept_no = d.dept_no JOIN salaries s on e.emp_no = s.emp_no GROUP BY d.dept_name;

@@ -1,0 +1,25 @@
+a) Tulosta DVD-elokuvien kielet (language) aakkosjärjestyksessä
+	- mysql> SELECT name AS language FROM language ORDER BY name ASC;
+
+b) Tulosta kaikkien niiden näyttelijöiden elokuvat, joiden sukunimi on Temple.
+	- mysql> select film.title, actor.last_name FROM actor 
+	-> join film_actor on actor.actor_id = film_actor.actor_id 
+	-> join film on film_actor.film_id = film.film_id where actor.last_name= 'Temple';
+
+c) Tulosta elokuvassa "Ghost Groundhog" näytelleet näyttelijät.
+	 mysql> select actor.first_name, actor.last_name from actor
+    	-> join film_actor on actor.actor_id = film_actor.actor_id
+    	-> join film on film_actor.film_id = film.film_id
+    	-> where film.title = 'Ghost Groundhog';
+
+d) Montako kauhuelokuvaa ("Horror") tietokannassa on ?
+	mysql> select count(*) from film
+    	-> join film_category on film.film_id = film_category.category_id
+    	-> join category on film_category.category_id = category.category_id
+    	-> where category.name='Horror';
+
+e) Tulosta kaikki kauhuelokuvat.
+	mysql> select film.title from film
+    	-> join film_category on film.film_id = film_category.film_id
+    	-> join category on film_category.category_id = category.category_id
+    	-> where category.name ='Horror';

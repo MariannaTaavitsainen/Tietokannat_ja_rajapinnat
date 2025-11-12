@@ -1,0 +1,32 @@
+a) Minkä nimisiä osastoja (Departments) Employees-tietokannassa on ?
+	mysql> select dept_name from departments;
+	-Tulosti 9 riviä.
+
+b) Tulosta, (yhden kerran kukin) mitä nimikkeitä (title) tietokannassa on.
+	mysql> select distinct title from titles;
+	-Tulosti 7 titlea/riviä.
+	
+
+c) Mikä on suurin ja pienin palkka (salary) ? VIHJE: MIN, MAX. Voi olla kaksi erillistä kyselyä.
+	mysql> select max(salary) from salaries;
+	- 158220 
+	
+	mysql> select min(salary) from salaries;
+	- 38623 
+
+d) Mikä on keskimääräinen palkka ? VIHJE: AVG
+	mysql> select avg(salary) from salaries;
+	- 63810.7448 
+
+e) Tulosta kaikki työntekijät, joiden sukunimi on Facello.
+	mysql> select first_name, last_name from employees where last_name = 'Facello';
+	- 186 rows in set (0.14 sec)
+	
+
+f) Kuinka moni työntekijä on syntynyt 1950-luvulla ?
+	mysql> select count(first_name) from employees WHERE birth_date between '1950-01-01' and '1959-12-31';
+	- 182886
+
+g) Montako miestä ja montako naista työntekijöissä on ?
+	mysql> select gender, count(*) from employees group by gender;
+	-  M = 179973 ja F = 120051 
