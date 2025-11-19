@@ -1,0 +1,29 @@
+1) Tulosta kaikki opiskelijat, joilla on tietokannassa hylätty arvosana
+	mysql> select opiskelija.etunimi,opiskelija.sukunimi,arviointi.arvosana,opintojakso.nimi from Arviointi 
+	JOIN Opiskelija on Opiskelija.idOpiskelija = Arviointi.idOpiskelija 
+	JOIN Opintojakso on Opintojakso.idOpintojakso = Arviointi.idOpintojakso 
+	where arviointi.arvosana=0;
+
+2) Tulosta kaikki Fysiikka 3-kurssin hyväksytysti suorittaneet
+	mysql> select opiskelija.etunimi,opiskelija.sukunimi,arviointi.arvosana,opintojakso.nimi from Arviointi 
+	JOIN Opiskelija on Opiskelija.idOpiskelija = Arviointi.idOpiskelija 
+	JOIN Opintojakso on Opintojakso.idOpintojakso = Arviointi.idOpintojakso 
+	where opintojakso.nimi='Fysiikka 3' AND arviointi.arvosana >=1;
+
+3) Mille kursseille Hessu on osallistunut ?
+	mysql> select opiskelija.etunimi,opiskelija.sukunimi,opintojakso.nimi from Arviointi 
+	JOIN Opiskelija on Opiskelija.idOpiskelija = Arviointi.idOpiskelija 
+	JOIN Opintojakso on Opintojakso.idOpintojakso = Arviointi.idOpintojakso 
+	where opiskelija.etunimi='Hessu' AND opiskelija.sukunimi='Hopo';
+
+4) Mikä on Akun opintosuoritusten keskiarvo ?
+	mysql> select AVG(arvosana) as Keskiarvo, opiskelija.etunimi, opiskelija.sukunimi from Arviointi 
+	JOIN Opiskelija on Opiskelija.idOpiskelija = Arviointi.idOpiskelija 
+	JOIN Opintojakso on Opintojakso.idOpintojakso = Arviointi.idOpintojakso 
+	where opiskelija.etunimi='Aku' AND opiskelija.sukunimi='Ankka';
+
+5) Millä opintojaksoilla ei ole yhtään suoritusmerkintää ? (Vihje: Tarvitset tässä left tai right joinia...)
+	mysql> select opintojakso.nimi from opintojakso 
+	LEFT JOIN arviointi on Opintojakso.idOpintojakso = Arviointi.idOpintojakso 
+	where arviointi.arvosana is null;
+	
