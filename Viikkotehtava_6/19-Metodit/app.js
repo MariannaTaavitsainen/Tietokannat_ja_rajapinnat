@@ -39,4 +39,11 @@ app.get('/example2/:firstName/:lastName',
     }
 );
 
+app.post('/',
+    function(request,response){
+        response.send(request.body);
+        console.log(request.body);
+    }
+);
+
 module.exports = app;
