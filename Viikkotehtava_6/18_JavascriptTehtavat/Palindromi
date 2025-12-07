@@ -1,0 +1,15 @@
+const prompt = require('prompt-sync')();
+
+function Palindromi(sana) {
+    const pelkistetty = sana.toLowerCase();
+    const kaannetty = pelkistetty.split('').reverse().join('');
+    return pelkistetty === kaannetty;
+}
+
+const sana = prompt("Anna sana, jotta naet onko se palindromi: ");
+
+if (Palindromi(sana)) {
+    console.log("Sana on palindromi!")
+} else {
+    console.log("Sana ei ole palindromi.");
+}
